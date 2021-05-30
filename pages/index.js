@@ -19,6 +19,7 @@ export default function Home({ allPostsData }) {
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
+		<meta name="robots" content="noindex" />
       </Head>
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
