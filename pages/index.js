@@ -4,6 +4,7 @@ import utilStyles from '../styles/utils.module.css'
 import { getSortedPostsData } from '../lib/posts'
 import Link from 'next/link'
 import Date from '../components/date'
+import { useState } from 'react'
 
 export async function getStaticProps() {
 	const allPostsData = getSortedPostsData()
@@ -15,6 +16,14 @@ export async function getStaticProps() {
 }
 
 export default function Home({ allPostsData }) {
+	const [user, setUser] = useState([]);
+	const fetchUser = async () => {
+		let result = await fetch('/api/user')
+		result.json().then((res) => {
+			setUser(res.name)
+			console.log(res)
+		})
+	}
   return (
     <Layout home>
       <Head>
@@ -28,6 +37,11 @@ export default function Home({ allPostsData }) {
           <a href="https://nextjs.org/learn">our Next.js tutorial</a>.)
         </p>
       </section>
+
+	  <section>
+	  <button onClick={fetchUser}>click me</button>
+	  <p>{user}</p>
+	  </section>
 
 	  <section className={`${utilStyles.headingMd} ${utilStyles.padding1px}`}>
 	  	<h2 className={utilStyles.headingLg}>Blog</h2>
